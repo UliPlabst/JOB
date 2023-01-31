@@ -14,9 +14,9 @@
  */
 
 var EXIF = require('./exif');
-var decoderWorkerBlobString = require('./DecoderWorker');
+var { decoderWorkerBlobString } = require('./DecoderWorker');
 
-var BarcodeReader = {
+export var BarcodeReader = {
   Config: {
     // Set to false if the decoder should look for one barcode and then stop. Increases performance.
     Multiple: true,
@@ -329,7 +329,7 @@ var BarcodeReader = {
   },
 
   FixCanvas: function(canvas) {
-    var ctx = canvas.getContext('2d');
+    var ctx = canvas.getContext('2d', { willReadFrequently: true });
     var drawImage = ctx.drawImage;
     ctx.drawImage = function(img, sx, sy, sw, sh, dx, dy, dw, dh) {
       var vertSquashRatio = 1;
@@ -350,11 +350,3 @@ var BarcodeReader = {
 };
 
 
-if (typeof exports !== 'undefined') {
-  if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = BarcodeReader;
-  }
-  exports.BarcodeReader = BarcodeReader;
-} else {
-  root.BarcodeReader = BarcodeReader;
-}
