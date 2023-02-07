@@ -47,10 +47,14 @@ export var BarcodeReader = {
   Stream: null, // The actual video.
   DecodeStreamActive: false, // Will be set to false when StopStreamDecode() is called.
   Decoded: [], // Used to enfore the ForceUnique property.
-  DecoderWorker: new Worker( URL.createObjectURL(new Blob([decoderWorkerBlobString], {type: "application/javascript"}) ) ),
+  DecoderWorker: null,
   OrientationCallback: null,
   // Always call the Init().
   Init: function() {
+    this.DecoderWorker = new Worker(
+      URL.createObjectURL(new Blob([decoderWorkerBlobString], {type: "application/javascript"}))
+    );
+    this.DecoderWorker.addEventListener
     BarcodeReader.ScanCanvas = BarcodeReader.FixCanvas(document.createElement("canvas"));
     BarcodeReader.ScanCanvas.width = 640;
     BarcodeReader.ScanCanvas.height = 480;

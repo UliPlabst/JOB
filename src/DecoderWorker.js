@@ -2957,5 +2957,8 @@ var decoderWorkerBlob = function decoderWorkerBlob(){
 };
 
 export var decoderWorkerBlobString = decoderWorkerBlob.toString();
-decoderWorkerBlobString = decoderWorkerBlobString.substring(decoderWorkerBlobString.indexOf("{")+1, decoderWorkerBlobString.lastIndexOf("}"));
+decoderWorkerBlobString = decoderWorkerBlobString.substring(
+    decoderWorkerBlobString.indexOf("{") + 1,
+    decoderWorkerBlobString.lastIndexOf("}")
+);
 
