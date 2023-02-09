@@ -13,8 +13,8 @@
  *
  */
 
-var EXIF = require('./exif');
-var { decoderWorkerBlobString } = require('./DecoderWorker');
+import { EXIF } from "./exif";
+import { decoderWorkerBlobString }from './DecoderWorker';
 
 export var BarcodeReader = {
   Config: {
@@ -51,9 +51,12 @@ export var BarcodeReader = {
   OrientationCallback: null,
   // Always call the Init().
   Init: function() {
-    this.DecoderWorker = new Worker(
-      URL.createObjectURL(new Blob([decoderWorkerBlobString], {type: "application/javascript"}))
-    );
+    if(this.DecoderWorker == null)
+    {
+      this.DecoderWorker = new Worker(
+        URL.createObjectURL(new Blob([decoderWorkerBlobString], {type: "application/javascript"}))
+      );
+    }
     this.DecoderWorker.addEventListener
     BarcodeReader.ScanCanvas = BarcodeReader.FixCanvas(document.createElement("canvas"));
     BarcodeReader.ScanCanvas.width = 640;

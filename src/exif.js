@@ -1,13 +1,13 @@
 var debug = false;
 var root = this;
 
-export var EXIF = function(obj) {
+export const EXIF = function(obj) {
   if (obj instanceof EXIF) return obj;
   if (!(this instanceof EXIF)) return new EXIF(obj);
   this.EXIFwrapped = obj;
 };
 
-export var ExifTags = EXIF.Tags = {
+var ExifTags = EXIF.Tags = {
 
   // version tags
   0x9000: "ExifVersion", // EXIF version
